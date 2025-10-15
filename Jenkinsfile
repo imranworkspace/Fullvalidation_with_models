@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: 'https://github.com/imranworkspace/Fullvalidation_with_models'
+                git branch: 'main', url: 'https://github.com/imranworkspace/Fullvalidation_with_models'
             }
         }
 
