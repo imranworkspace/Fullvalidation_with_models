@@ -15,7 +15,7 @@ services:
   db:
     image: postgres:15
     environment:
-      POSTGRES_DB: fpractice_db
+      POSTGRES_DB: fpractice_db2
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: imrandell
     volumes:

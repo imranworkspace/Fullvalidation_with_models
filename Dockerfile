@@ -1,29 +1,24 @@
 # Dockerfile
-
-# Base image
 FROM python:3.9-slim
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Set work directory
-WORKDIR /formvalidation_with__model
+# Set working directory
+WORKDIR /app
 
 # Install dependencies
-COPY requirnments.txt /formvalidation_with__model/
-RUN pip install --upgrade pip
-RUN pip install -r requirnments.txt
-
+RUN apt-get update && apt-get install -y build-essential libpq-dev curl && rm -rf /var/lib/apt/lists/*
 
 # Copy project files
-COPY . /formvalidation_with__model/
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . /app/
 
-# Copy entrypoint.sh
-COPY entrypoint.sh /entrypoint.sh
+# Collect static files (optional, can run at container start)
+# RUN python manage.py collectstatic --noinput
 
-# Give execute permissions
-RUN chmod +x /entrypoint.sh
+# Run Gunicorn
+CMD ["gunicorn", "formvalidation_with__model.wsgi:application", "--bind", "0.0.0.0:8010"]
 
-# Set entrypoint
-ENTRYPOINT ["/entrypoint.sh"]

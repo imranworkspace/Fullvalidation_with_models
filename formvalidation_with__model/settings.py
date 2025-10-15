@@ -90,7 +90,7 @@ DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',  # ✅ force psycopg2
         'ENGINE': 'django.db.backends.postgresql',# for docker
-        'NAME': 'fpractice_db',
+        'NAME': 'fpractice_db2',
         'USER': 'postgres',# your username
         'PASSWORD': 'imrandell',
         'HOST': 'db',  # for docker
