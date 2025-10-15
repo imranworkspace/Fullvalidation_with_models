@@ -78,18 +78,17 @@ WSGI_APPLICATION = 'formvalidation_with__model.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}
+}'''
 
 
 
-'''DATABASES = {
+DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',  # ✅ force psycopg2
         'ENGINE': 'django.db.backends.postgresql',# for docker
         'NAME': 'fpractice_db2',
         'USER': 'postgres',# your username
@@ -98,7 +97,7 @@ DATABASES = {
         # 'HOST': 'localhost',  # Or your DB host if using Docker or remote DB
         'PORT': '5432',       # Default PostgreSQL port
     }
-}'''
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
