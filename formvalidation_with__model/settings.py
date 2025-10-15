@@ -94,7 +94,6 @@ DATABASES = {
         'USER': 'postgres',# your username
         'PASSWORD': 'imrandell',
         'HOST': 'db',  # for docker
-        # 'HOST': 'localhost',  # Or your DB host if using Docker or remote DB
         'PORT': '5432',       # Default PostgreSQL port
     }
 }
