@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_beat',# for celery 
     "crispy_forms",
     "crispy_bootstrap5",
     'api',
@@ -77,16 +78,16 @@ WSGI_APPLICATION = 'formvalidation_with__model.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-'''DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-'''
 
 
-DATABASES = {
+
+'''DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',  # ✅ force psycopg2
         'ENGINE': 'django.db.backends.postgresql',# for docker
@@ -97,7 +98,7 @@ DATABASES = {
         # 'HOST': 'localhost',  # Or your DB host if using Docker or remote DB
         'PORT': '5432',       # Default PostgreSQL port
     }
-}
+}'''
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -153,3 +154,11 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # media
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'  # or os.path.join(BASE_DIR, 'media') if BASE_DIR is not a Path
+
+
+# celery and redis
+'''CELERY_BROKER_URL = "redis://127.0.0.1:6379/1"
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/1"''' 
+# for docker,jenkins
+CELERY_BROKER_URL = "redis://redis:6379/1"
+CELERY_RESULT_BACKEND = "redis://redis:6379/1"

@@ -2,7 +2,8 @@ from django.shortcuts import render,HttpResponseRedirect,redirect,HttpResponse
 from .models import StudentModel
 from .studentform import StudentForm,LoginForm
 from django.views.decorators.csrf import csrf_exempt
-
+# celery redis
+from api.tasks import mul,visit_cache
 
 registration_page="reg.html"
 login_page="login.html"
@@ -94,10 +95,20 @@ def registrationForm(request):
             stud_create.save()
             return redirect(login_url)
         else:
-            return render(request,registration_page, {"fm": fm})
+            return render(request,registration_page, {'fm':fm})
     else:
         fm=StudentForm()
-        return render(request,registration_page,{'fm':fm})
+        # calling celery,redis
+        visits = visit_cache.delay()
+        muls = mul.delay(10,200)
+        context = {
+            "fm": fm,
+            'visits':visits,
+            'mul':muls
+        }
+        print('task= ',visits)
+        print('multiplication = ',muls)
+        return render(request,registration_page,context)
 
 def homepage(request):
     fname = request.session.get('name','guest')
