@@ -31,8 +31,10 @@ pipeline {
         stage('Run Migrations') {
             steps {
                 // Create and apply database migrations
-                bat "%VENV%\\Scripts\\python manage.py makemigrations"
-                bat "%VENV%\\Scripts\\python manage.py migrate"
+                // bat "%VENV%\\Scripts\\python manage.py makemigrations"
+                // bat "%VENV%\\Scripts\\python manage.py migrate"
+                bat 'docker-compose run django python manage.py makemigrations'
+                bat 'docker-compose run django python manage.py migrate'
             }
         }
 
