@@ -1,30 +1,16 @@
 pipeline {
-    agent any   // Run this pipeline on any available Jenkins agent
+    agent any
 
     environment {
-        // Define environment variables used throughout the pipeline
-        VENV = "myenv"   // Name of the Python virtual environment
-        PYTHON = "C:\\Users\\imran\\AppData\\Local\\Programs\\Python\\Python38\\python.exe"   // Path to the Python executable (adjust if needed)
-        DOCKER_IMAGE = "imrandocker24/formvalidation_with__model"   // Docker image name to build and push
+        PYTHON = "C:\\Users\\imran\\AppData\\Local\\Programs\\Python\\Python38\\python.exe"
+        DOCKER_IMAGE = "imrandocker24/formvalidation_with__model"
     }
 
     stages {
 
         stage('Checkout Code') {
             steps {
-                // Clone the source code from the GitHub repository
                 git branch: 'main', url: 'https://github.com/imranworkspace/Fullvalidation_with_models'
-            }
-        }
-
-        stage('Setup Virtualenv') {
-            steps {
-                // Create a new Python virtual environment
-                bat "%PYTHON% -m venv %VENV%"
-                // Upgrade pip to the latest version
-                bat "%VENV%\\Scripts\\python -m pip install --upgrade pip"
-                // Install dependencies from requirements.txt
-                bat "%VENV%\\Scripts\\pip install -r requirements.txt"
             }
         }
 
@@ -38,21 +24,38 @@ pipeline {
             }
         }
 
-        stage('Run Migrations') {
+        stage('Build & Run Containers') {
             steps {
-                // Create and apply database migrations
-                // bat "%VENV%\\Scripts\\python manage.py makemigrations"
-                // bat "%VENV%\\Scripts\\python manage.py migrate"
-                bat 'docker-compose run django python manage.py makemigrations'
-                bat 'docker-compose run django python manage.py migrate'
+                // Rebuild everything fresh
+                bat 'docker-compose -f docker-compose.yml down || exit 0'
+                bat 'docker-compose -f docker-compose.yml up -d --build'
             }
         }
-        stage('Build Docker Image') {
+
+        stage('Check Running Containers') {
             steps {
-                // Build the Docker image from the Dockerfile in the repository
-                bat "docker build -t %DOCKER_IMAGE% ."
+                bat 'docker ps -a'
             }
         }
-        
+
+        stage('Run Migrations & Collectstatic') {
+            steps {
+                // Wait for DB, then apply migrations & collect static files
+                bat 'docker exec formvalidation_with__model python manage.py migrate --noinput'
+                bat 'docker exec formvalidation_with__model python manage.py collectstatic --noinput'
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    bat """
+                        echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
+                        docker build -t %DOCKER_IMAGE% .
+                        docker push %DOCKER_IMAGE%
+                    """
+                }
+            }
+        }
     }
 }

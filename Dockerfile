@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app/
 
 # Collect static files (optional, can run at container start)
-# RUN python manage.py collectstatic --noinput
+RUN python manage.py collectstatic --noinput
 
 # Run Gunicorn
 CMD ["gunicorn", "formvalidation_with__model.wsgi:application", "--bind", "0.0.0.0:8010"]
