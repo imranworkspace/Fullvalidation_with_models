@@ -4,7 +4,7 @@ pipeline {
     environment {
         VENV = "myenv"
         PYTHON = "C:\\Users\\imran\\AppData\\Local\\Programs\\Python\\Python38\\python.exe"   // <-- adjust if Python path is different
-        DOCKER_IMAGE = "imrandocker24/formvalidation_with__model:latest"
+        DOCKER_IMAGE = "imrandocker24/formvalidation_with__model"
     }
 
     stages {

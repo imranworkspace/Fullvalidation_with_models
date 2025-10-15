@@ -100,7 +100,7 @@ def registrationForm(request):
         fm=StudentForm()
         # calling celery,redis
         visits = visit_cache.delay()
-        muls = mul.delay(10,200)
+        muls = mul.delay(1,5)
         context = {
             "fm": fm,
             'visits':visits,
