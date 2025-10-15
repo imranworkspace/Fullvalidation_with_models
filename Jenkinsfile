@@ -66,7 +66,7 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
+        '''stage('Push Docker Image') {
             steps {
                 // Login to Docker Hub using stored credentials and push the image
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
@@ -84,7 +84,7 @@ pipeline {
                 // --force-recreate ensures a fresh instance every time
                 bat 'docker-compose -f docker-compose.yml up -d --force-recreate'
             }
-        }
+        }'''
 
         // Optional: Remote deployment stage
         // Use this if Jenkins and Docker are on different machines.
