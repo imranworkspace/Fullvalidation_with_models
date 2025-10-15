@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - .:/formvalidation_with__model
+      - .:/app
     ports:
       - "8010:8010"
     depends_on:
