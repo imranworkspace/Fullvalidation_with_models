@@ -147,6 +147,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+'''
 # for bootstrap
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -162,3 +163,39 @@ CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/1"'''
 # for docker,jenkins
 CELERY_BROKER_URL = "redis://redis:6379/1"
 CELERY_RESULT_BACKEND = "redis://redis:6379/1"
+'''
+
+# ----------------------------
+# STATIC FILES
+# ----------------------------
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # For collectstatic
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'  # Create this folder in your project to avoid warnings
+]
+
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# for bootstrap
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# media
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'  # or os.path.join(BASE_DIR, 'media') if BASE_DIR is not a Path
+
+
+# celery and redis
+'''CELERY_BROKER_URL = "redis://127.0.0.1:6379/1"
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/1"''' 
+# for docker,jenkins
+# Celery / Redis
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND')
+
+# CSRF trusted origins
+CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED', default='').split(',')
