@@ -34,19 +34,6 @@ pipeline {
             }
         }
 
-        stage('Build Docker Images') {
-            steps {
-                script {
-                    // Build the Docker image
-                    sh """
-                        docker build -t ${IMAGE_NAME}:${TAG} .
-                    """
-                }
-            }
-        }
-
-        
-
         stage('Build & Run Containers') {
             steps {
                 // Rebuild everything fresh
@@ -69,19 +56,7 @@ pipeline {
             }
         }
 
-        // stage('Push Docker Image') {
-        //     steps {
-        //         withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-        //             bat """
-        //                 echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
-        //                 docker build -t %DOCKER_IMAGE% .
-        //                 docker push %DOCKER_IMAGE%
-        //             """
-        //         }
-        //     }
-        // }
-        // ---------------- Post Actions [TAKING SQL BACKUP & SENDING EMAIL STATUS OF BUILD]----------------
-    
+        
     }
     post {
         success {
