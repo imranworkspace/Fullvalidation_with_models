@@ -128,7 +128,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-
+'''
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -147,7 +147,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-'''
+
 # for bootstrap
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -158,12 +158,14 @@ MEDIA_ROOT = BASE_DIR / 'media'  # or os.path.join(BASE_DIR, 'media') if BASE_DI
 
 
 # celery and redis
-'''CELERY_BROKER_URL = "redis://127.0.0.1:6379/1"
-CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/1"''' 
 # for docker,jenkins
 CELERY_BROKER_URL = "redis://redis:6379/1"
 CELERY_RESULT_BACKEND = "redis://redis:6379/1"
+
 '''
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 # ----------------------------
 # STATIC FILES
