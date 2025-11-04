@@ -12,7 +12,7 @@ pipeline {
     // ---------------- CRON Schedule ----------------
     // Run automatically every 30 minutes
     triggers {
-        cron('H/15 * * * *')
+        cron('H/45 * * * *')
     }
 
 
