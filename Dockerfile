@@ -17,6 +17,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app/
 
 # Copy .env into container
+COPY .env /app/.env
+
+# Copy .env into container
 COPY static/ /app/static/
 
 # Collect static files (optional, can run at container start)
