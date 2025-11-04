@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_celery_beat',# for celery 
-    "crispy_forms",
-    "crispy_bootstrap5",
+    "crispy_forms",# bootstrap forms
+    "crispy_bootstrap5", # # bootstrap forms 2
     'api',
 ]
 
@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'formvalidation_with__model.wsgi.application'
 
 
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',# for docker
         'NAME': 'fpractice_db2',
@@ -95,6 +95,17 @@ DATABASES = {
         'PASSWORD': 'imrandell',
         'HOST': 'db',  # for docker
         'PORT': '5432',       # Default PostgreSQL port
+    }
+}'''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_DB'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
