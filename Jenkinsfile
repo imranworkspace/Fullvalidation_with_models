@@ -45,7 +45,7 @@ pipeline {
             }
         }
 
-        stage('Push Docker Images') {
+        '''stage('Push Docker Images') {
             steps {
                 script {
                     // Log in to Docker Hub
@@ -61,7 +61,7 @@ pipeline {
                     """
                 }
             }
-        }
+        }'''
 
         stage('Build & Run Containers') {
             steps {
