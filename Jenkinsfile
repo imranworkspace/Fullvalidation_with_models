@@ -13,9 +13,6 @@ pipeline {
     // Run automatically every 30 minutes
     triggers {
         cron('H/15 * * * *')
-        DB_NAME = "fpractice_db2"
-        DB_USER = "postgres"
-        BACKUP_DIR = "D:/jenkins_backups"
     }
 
 
