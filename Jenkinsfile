@@ -6,7 +6,7 @@ pipeline {
         DOCKER_IMAGE = "imrandocker24/formvalidation_with__model"
         DB_NAME = "fpractice_db2"
         DB_USER = "postgres"
-        BACKUP_DIR = "D:\jenkins_backups"
+        BACKUP_DIR = "D:/jenkins_backups"
     }
 
     // ---------------- CRON Schedule ----------------
