@@ -67,7 +67,9 @@ pipeline {
         echo "${BACKUP_DIR}"
 
         // Send success email using credentials
-        withCredentials([usernamePassword(credentialsId: '786gmail', usernameVariable: 'MAIL_USER', passwordVariable: 'MAIL_PASS')]) {
+        // withCredentials([usernamePassword(credentialsId: '786gmail', usernameVariable: 'MAIL_USER', passwordVariable: 'MAIL_PASS')]) {
+        // '82bb22df-7adb-4b5f-81fe-fcd3782da29c' for imranlatur24studymaterial@gmail.com
+        withCredentials([usernamePassword(credentialsId: '82bb22df-7adb-4b5f-81fe-fcd3782da29c', usernameVariable: 'MAIL_USER', passwordVariable: 'MAIL_PASS')]) {
             emailext (
                 subject: "✅ SUCCESS: Django Jenkins Pipeline Completed",
                 body: """<p>Hi Team,</p>
@@ -91,7 +93,8 @@ pipeline {
         echo 'Pipeline failed. Check the console output for errors.'
         
         script {
-            withCredentials([usernamePassword(credentialsId: '786gmail', usernameVariable: 'MAIL_USER', passwordVariable: 'MAIL_PASS')]) {
+            //withCredentials([usernamePassword(credentialsId: '786gmail', usernameVariable: 'MAIL_USER', passwordVariable: 'MAIL_PASS')]) {
+            withCredentials([usernamePassword(credentialsId: '82bb22df-7adb-4b5f-81fe-fcd3782da29c', usernameVariable: 'MAIL_USER', passwordVariable: 'MAIL_PASS')]) {
                 emailext (
                     subject: "❌ FAILED: Django Jenkins Pipeline Error",
                     body: """<p>Hi Team,</p>
