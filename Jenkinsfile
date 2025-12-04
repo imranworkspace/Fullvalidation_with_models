@@ -6,7 +6,7 @@ pipeline {
         DOCKER_IMAGE = "imrandocker24/formvalidation_with__model"
         DB_NAME = "fpractice_db2"
         DB_USER = "postgres"
-        BACKUP_DIR = "D:/jenkins_backups"
+        BACKUP_DIR = "D:\jenkins_backups"
     }
 
     // ---------------- CRON Schedule ----------------
@@ -60,16 +60,14 @@ pipeline {
     }
     post {
     success {
-        archiveArtifacts artifacts: 'D:/jenkins_backups/*.sql', fingerprint: true, allowEmptyArchive: true
+        archiveArtifacts artifacts: 'D:\jenkins_backups/*.sql', fingerprint: true, allowEmptyArchive: true
         echo "${env.BUILD_NUMBER}"
         echo "${env.JOB_NAME}"
         echo "${env.BUILD_URL}"
         echo "${BACKUP_DIR}"
 
         // Send success email using credentials
-        // withCredentials([usernamePassword(credentialsId: '786gmail', usernameVariable: 'MAIL_USER', passwordVariable: 'MAIL_PASS')]) {
-        // '82bb22df-7adb-4b5f-81fe-fcd3782da29c' for imranlatur24studymaterial@gmail.com
-        withCredentials([usernamePassword(credentialsId: '82bb22df-7adb-4b5f-81fe-fcd3782da29c', usernameVariable: 'MAIL_USER', passwordVariable: 'MAIL_PASS')]) {
+        withCredentials([usernamePassword(credentialsId: '786gmail', usernameVariable: 'MAIL_USER', passwordVariable: 'MAIL_PASS')]) {
             emailext (
                 subject: "✅ SUCCESS: Django Jenkins Pipeline Completed",
                 body: """<p>Hi Team,</p>
@@ -93,8 +91,7 @@ pipeline {
         echo 'Pipeline failed. Check the console output for errors.'
         
         script {
-            //withCredentials([usernamePassword(credentialsId: '786gmail', usernameVariable: 'MAIL_USER', passwordVariable: 'MAIL_PASS')]) {
-            withCredentials([usernamePassword(credentialsId: '82bb22df-7adb-4b5f-81fe-fcd3782da29c', usernameVariable: 'MAIL_USER', passwordVariable: 'MAIL_PASS')]) {
+            withCredentials([usernamePassword(credentialsId: '786gmail', usernameVariable: 'MAIL_USER', passwordVariable: 'MAIL_PASS')]) {
                 emailext (
                     subject: "❌ FAILED: Django Jenkins Pipeline Error",
                     body: """<p>Hi Team,</p>
