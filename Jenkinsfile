@@ -80,7 +80,7 @@ pipeline {
                         <li>URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></li>
                         </ul>
                         <p>– Jenkins</p>""",
-                to: "imranlatur24studymaterial@gmail.com",
+                to: "shaikh.novetrics@gmail.com",
                 from: "${MAIL_USER}",
                 replyTo: "${MAIL_USER}",
                 mimeType: 'text/html'
@@ -99,7 +99,7 @@ pipeline {
                              <p>Please check the console logs for more details:</p>
                              <p><a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
                              <p>– Jenkins</p>""",
-                    to: "imranlatur24studymaterial@gmail.com",
+                    to: "shaikh.novetrics@gmail.com",
                     from: "${MAIL_USER}",
                     replyTo: "${MAIL_USER}",
                     mimeType: 'text/html'
